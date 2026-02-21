@@ -1,9 +1,12 @@
 import { Component } from '@angular/core'
-import { RouterOutlet } from '@angular/router'
+import { RouterLink, RouterOutlet } from '@angular/router'
+import { LayoutImports } from '@/shared/components/layout'
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, LayoutImports, RouterLink],
   templateUrl: './app.html',
 })
-export class App {}
+export class App {
+  readonly currentYear = new Date().getFullYear()
+}

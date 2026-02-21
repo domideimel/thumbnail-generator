@@ -1,3 +1,13 @@
 <div class="bg-background text-foreground">
-  <router-outlet />
+  <z-layout>
+    <z-header class="sticky top-0 z-50">
+      <a routerLink="/">Thumbnail Generator</a>
+    </z-header>
+    <z-content>
+      <router-outlet />
+    </z-content>
+    <z-footer>
+      <p class="text-center">© {{currentYear}} Thumbnail Generator</p>
+    </z-footer>
+  </z-layout>
 </div>
