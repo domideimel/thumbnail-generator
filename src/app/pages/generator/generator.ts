@@ -68,6 +68,7 @@ export class Generator {
     link.download = image.filename;
     link.click();
   }
+
   downloadAll() {
     this.generatedImages().forEach((img, index) => {
       setTimeout(() => {
