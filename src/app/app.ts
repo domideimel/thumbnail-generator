@@ -1,12 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core'
+import { RouterLink, RouterOutlet } from '@angular/router'
+import { LayoutImports } from '@/shared/components/layout'
+import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, LayoutImports, RouterLink, NgOptimizedImage],
   templateUrl: './app.html',
-  styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('thumbnail-generator');
+  readonly currentYear = new Date().getFullYear()
 }
