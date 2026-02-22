@@ -1,5 +1,5 @@
-import type { ListenerOptions } from '@angular/core';
-import { EventManagerPlugin } from '@angular/platform-browser';
+import type { ListenerOptions } from '@angular/core'
+import { EventManagerPlugin } from '@angular/platform-browser'
 
 /**
  * Angular EventManagerPlugin that provides event modifier syntax for templates.
@@ -24,83 +24,83 @@ import { EventManagerPlugin } from '@angular/platform-browser';
  * (click.stop)="handler()"
  */
 export class ZardEventManagerPlugin extends EventManagerPlugin {
-  #keywords = ['prevent', 'stop', 'stop-immediate', 'prevent-with-stop'];
+  #keywords = ['prevent', 'stop', 'stop-immediate', 'prevent-with-stop']
 
-  override supports(eventName: string): boolean {
-    return this.#keywords.some(keyword => eventName.endsWith(`.${keyword}`));
+  override supports (eventName: string): boolean {
+    return this.#keywords.some(keyword => eventName.endsWith(`.${keyword}`))
   }
 
-  override addEventListener(
+  override addEventListener (
     element: HTMLElement,
     eventName: string,
     handler: (event: Event) => void,
     options?: ListenerOptions,
     // eslint-disable-next-line
   ): Function {
-    const { event, keyword, keys } = this.#provideEventFrom(eventName, this.#keywords);
+    const { event, keyword, keys } = this.#provideEventFrom(eventName, this.#keywords)
     return this.manager.addEventListener(
       element,
       event,
       (event: Event) => {
-        const isKeyboardEvent = event instanceof KeyboardEvent;
-        const isElementDisabled = element.getAttribute('aria-disabled') === 'true';
+        const isKeyboardEvent = event instanceof KeyboardEvent
+        const isElementDisabled = element.getAttribute('aria-disabled') === 'true'
         const shouldApplyModifier =
-          (!keys.length || (isKeyboardEvent && keys.includes(event.key.toLowerCase()))) && !isElementDisabled;
+          (!keys.length || (isKeyboardEvent && keys.includes(event.key.toLowerCase()))) && !isElementDisabled
 
         if (shouldApplyModifier) {
           switch (keyword) {
             case 'stop':
-              event.stopPropagation();
-              break;
+              event.stopPropagation()
+              break
             case 'stop-immediate':
-              event.stopImmediatePropagation();
-              break;
+              event.stopImmediatePropagation()
+              break
             case 'prevent-with-stop':
-              event.preventDefault();
-              event.stopPropagation();
-              break;
+              event.preventDefault()
+              event.stopPropagation()
+              break
             default:
-              event.preventDefault();
-              break;
+              event.preventDefault()
+              break
           }
         }
-        handler(event);
+        handler(event)
       },
       options,
-    );
+    )
   }
 
-  #provideEventFrom(eventName: string, keywords: string[]): { event: string; keyword: string; keys: string[] } {
-    const eventNameSubstrings = eventName.split('.');
-    let event = '';
-    let keys: string[] = [];
-    let keyword = '';
+  #provideEventFrom (eventName: string, keywords: string[]): { event: string; keyword: string; keys: string[] } {
+    const eventNameSubstrings = eventName.split('.')
+    let event = ''
+    let keys: string[] = []
+    let keyword = ''
 
     for (const substring of eventNameSubstrings) {
       if (substring.startsWith('{')) {
-        keys = this.#extractKeys(substring);
-        continue;
+        keys = this.#extractKeys(substring)
+        continue
       } else if (keywords.includes(substring)) {
-        keyword = substring;
-        break;
+        keyword = substring
+        break
       } else if (!event) {
-        event = substring;
+        event = substring
       } else {
-        event += `.${substring}`;
+        event += `.${substring}`
       }
     }
 
-    return { event, keyword, keys };
+    return { event, keyword, keys }
   }
 
-  #extractKeys(substring: string): string[] {
-    const stringList = substring.substring(1, substring.length - 1);
+  #extractKeys (substring: string): string[] {
+    const stringList = substring.substring(1, substring.length - 1)
     return stringList
       .split(',')
       .map(raw => {
-        const s = raw.toLowerCase().trim();
-        return s === 'space' ? ' ' : s;
+        const s = raw.toLowerCase().trim()
+        return s === 'space' ? ' ' : s
       })
-      .filter(Boolean);
+      .filter(Boolean)
   }
 }

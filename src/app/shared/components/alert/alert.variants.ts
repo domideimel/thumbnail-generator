@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority'
 
 export const alertVariants = cva('relative w-full rounded-lg border px-4 py-3 text-sm flex items-center gap-3', {
   variants: {
@@ -10,11 +10,11 @@ export const alertVariants = cva('relative w-full rounded-lg border px-4 py-3 te
   defaultVariants: {
     zType: 'default',
   },
-});
+})
 
-export const alertIconVariants = cva('shrink-0 self-start text-base!');
+export const alertIconVariants = cva('shrink-0 self-start text-base!')
 
-export const alertTitleVariants = cva('font-medium tracking-tight leading-none');
+export const alertTitleVariants = cva('font-medium tracking-tight leading-none')
 
 export const alertDescriptionVariants = cva('text-sm leading-relaxed mt-1', {
   variants: {
@@ -26,6 +26,6 @@ export const alertDescriptionVariants = cva('text-sm leading-relaxed mt-1', {
   defaultVariants: {
     zType: 'default',
   },
-});
+})
 
 export type ZardAlertTypeVariants = NonNullable<VariantProps<typeof alertVariants>['zType']>;

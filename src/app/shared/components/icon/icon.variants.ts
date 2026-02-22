@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority'
 
 export const iconVariants = cva('flex items-center justify-center', {
   variants: {
@@ -12,6 +12,6 @@ export const iconVariants = cva('flex items-center justify-center', {
   defaultVariants: {
     zSize: 'default',
   },
-});
+})
 
 export type ZardIconSizeVariants = NonNullable<VariantProps<typeof iconVariants>['zSize']>;

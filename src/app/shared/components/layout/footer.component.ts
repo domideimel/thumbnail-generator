@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core'
 
-import type { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx'
 
-import { footerVariants } from '@/shared/components/layout/layout.variants';
-import { mergeClasses } from '@/shared/utils/merge-classes';
+import { footerVariants } from '@/shared/components/layout/layout.variants'
+import { mergeClasses } from '@/shared/utils/merge-classes'
 
 @Component({
   selector: 'z-footer',
   template: `
     <footer [class]="classes()" [style.height.px]="zHeight()">
-      <ng-content />
+      <ng-content/>
     </footer>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,8 +17,8 @@ import { mergeClasses } from '@/shared/utils/merge-classes';
   exportAs: 'zFooter',
 })
 export class FooterComponent {
-  readonly class = input<ClassValue>('');
-  readonly zHeight = input<number>(64);
+  readonly class = input<ClassValue>('')
+  readonly zHeight = input<number>(64)
 
-  protected readonly classes = computed(() => mergeClasses(footerVariants(), this.class()));
+  protected readonly classes = computed(() => mergeClasses(footerVariants(), this.class()))
 }

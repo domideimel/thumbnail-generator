@@ -1,21 +1,12 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  output,
-  type TemplateRef,
-  viewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output, type TemplateRef, viewChild, ViewEncapsulation, } from '@angular/core'
 
-import type { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx'
 
-import { ZardButtonComponent } from '@/shared/components/button/button.component';
-import { ZardIdDirective, ZardStringTemplateOutletDirective } from '@/shared/core';
-import { mergeClasses } from '@/shared/utils/merge-classes';
+import { ZardButtonComponent } from '@/shared/components/button/button.component'
+import { ZardIdDirective, ZardStringTemplateOutletDirective } from '@/shared/core'
+import { mergeClasses } from '@/shared/utils/merge-classes'
 
-import { cardBodyVariants, cardFooterVariants, cardHeaderVariants, cardVariants } from './card.variants';
+import { cardBodyVariants, cardFooterVariants, cardHeaderVariants, cardVariants } from './card.variants'
 
 @Component({
   selector: 'z-card',
@@ -53,11 +44,11 @@ import { cardBodyVariants, cardFooterVariants, cardHeaderVariants, cardVariants 
       }
 
       <div [class]="bodyClasses()" data-slot="card-content">
-        <ng-content />
+        <ng-content/>
       </div>
 
       <div [class]="footerClasses()" data-slot="card-footer">
-        <ng-content select="[card-footer]" />
+        <ng-content select="[card-footer]"/>
       </div>
     </ng-container>
   `,
@@ -77,38 +68,32 @@ import { cardBodyVariants, cardFooterVariants, cardHeaderVariants, cardVariants 
   exportAs: 'zCard',
 })
 export class ZardCardComponent {
-  private readonly generatedId = viewChild<ZardIdDirective>('z');
-
-  readonly class = input<ClassValue>('');
-  readonly zFooterBorder = input(false);
-  readonly zHeaderBorder = input(false);
-  readonly zAction = input('');
-  readonly zDescription = input<string | TemplateRef<void>>();
-  readonly zTitle = input<string | TemplateRef<void>>();
-
-  readonly zActionClick = output<void>();
-
-  protected readonly titleId = computed(() => {
-    const baseId = this.generatedId()?.id();
-    return this.zTitle() && baseId ? `${baseId}-title` : null;
-  });
-
-  protected readonly descriptionId = computed(() => {
-    const baseId = this.generatedId()?.id();
-    return this.zDescription() && baseId ? `${baseId}-description` : null;
-  });
-
-  protected readonly classes = computed(() => mergeClasses(cardVariants(), this.class()));
-  protected readonly bodyClasses = computed(() => mergeClasses(cardBodyVariants()));
+  readonly class = input<ClassValue>('')
+  readonly zFooterBorder = input(false)
+  readonly zHeaderBorder = input(false)
+  readonly zAction = input('')
+  readonly zDescription = input<string | TemplateRef<void>>()
+  readonly zTitle = input<string | TemplateRef<void>>()
+  readonly zActionClick = output<void>()
+  protected readonly classes = computed(() => mergeClasses(cardVariants(), this.class()))
+  protected readonly bodyClasses = computed(() => mergeClasses(cardBodyVariants()))
   protected readonly footerClasses = computed(() =>
     mergeClasses(cardFooterVariants(), this.zFooterBorder() ? 'border-t' : ''),
-  );
-
+  )
   protected readonly headerClasses = computed(() =>
     mergeClasses(cardHeaderVariants(), this.zHeaderBorder() ? 'border-b' : ''),
-  );
+  )
+  private readonly generatedId = viewChild<ZardIdDirective>('z')
+  protected readonly titleId = computed(() => {
+    const baseId = this.generatedId()?.id()
+    return this.zTitle() && baseId ? `${baseId}-title` : null
+  })
+  protected readonly descriptionId = computed(() => {
+    const baseId = this.generatedId()?.id()
+    return this.zDescription() && baseId ? `${baseId}-description` : null
+  })
 
-  protected onClick(): void {
-    this.zActionClick.emit();
+  protected onClick (): void {
+    this.zActionClick.emit()
   }
 }

@@ -24,19 +24,17 @@ import { ZardAlertComponent } from '@/shared/components/alert'
   templateUrl: './generator.html',
 })
 export class Generator {
+  readonly errorMessage = signal<string>('')
+  readonly generatedImages = signal<GeneratedImage[]>([])
+  readonly isLoading = signal(false)
   private readonly thumbnailGeneratorService = inject(ThumbnailGeneratorService)
   private readonly formSchema = signal({
     url: ''
   })
-  private readonly isSubmitting = signal(false)
-  readonly errorMessage = signal<string>('')
-  readonly generatedImages = signal<GeneratedImage[]>([])
   readonly urlForm = form(this.formSchema, schema => {
     return validateStandardSchema(schema, UrlFormSchema)
   })
-
-  readonly isLoading = signal(false)
-
+  private readonly isSubmitting = signal(false)
   readonly isInvalidForm = computed(() => this.urlForm().invalid() && this.urlForm().dirty() && this.isSubmitting())
 
   async onSubmit (event: Event) {

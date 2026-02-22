@@ -1,15 +1,15 @@
-import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core'
 
-import type { ClassValue } from 'clsx';
+import type { ClassValue } from 'clsx'
 
-import { contentVariants } from '@/shared/components/layout/layout.variants';
-import { mergeClasses } from '@/shared/utils/merge-classes';
+import { contentVariants } from '@/shared/components/layout/layout.variants'
+import { mergeClasses } from '@/shared/utils/merge-classes'
 
 @Component({
   selector: 'z-content',
   template: `
     <main>
-      <ng-content />
+      <ng-content/>
     </main>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -20,7 +20,7 @@ import { mergeClasses } from '@/shared/utils/merge-classes';
   exportAs: 'zContent',
 })
 export class ContentComponent {
-  readonly class = input<ClassValue>('');
+  readonly class = input<ClassValue>('')
 
-  protected readonly classes = computed(() => mergeClasses(contentVariants(), this.class()));
+  protected readonly classes = computed(() => mergeClasses(contentVariants(), this.class()))
 }

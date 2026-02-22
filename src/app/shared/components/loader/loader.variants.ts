@@ -1,4 +1,4 @@
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from 'class-variance-authority'
 
 export const loaderVariants = cva('', {
   variants: {
@@ -11,5 +11,5 @@ export const loaderVariants = cva('', {
   defaultVariants: {
     zSize: 'default',
   },
-});
+})
 export type ZardLoaderVariants = VariantProps<typeof loaderVariants>;

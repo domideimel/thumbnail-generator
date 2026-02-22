@@ -1,2 +1,2 @@
-export * from './input.directive';
-export * from './input.variants';
+export * from './input.directive'
+export * from './input.variants'

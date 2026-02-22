@@ -107,7 +107,8 @@ export class ThumbnailGeneratorService {
       if (parsed.hostname.includes('youtube.com')) {
         return parsed.searchParams.get('v')
       }
-    } catch (e) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (_) {
       return null
     }
     return null
