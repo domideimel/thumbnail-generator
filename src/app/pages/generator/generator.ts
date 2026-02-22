@@ -9,7 +9,6 @@ import { catchError, finalize, of, tap } from 'rxjs'
 import { GeneratedImage, UrlFormSchema } from '@/models'
 import { ZardLoaderComponent } from '@/shared/components/loader'
 import { ZardAlertComponent } from '@/shared/components/alert'
-import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-generator',
@@ -62,21 +61,21 @@ export class Generator {
     })
   }
 
-  downloadImage(image: GeneratedImage) {
-    const link = document.createElement('a');
-    link.href = image.dataUrl;
-    link.download = image.filename;
-    link.click();
+  downloadImage (image: GeneratedImage) {
+    const link = document.createElement('a')
+    link.href = image.dataUrl
+    link.download = image.filename
+    link.click()
   }
 
-  downloadAll() {
+  downloadAll () {
     this.generatedImages().forEach((img, index) => {
       setTimeout(() => {
-        const a = document.createElement('a');
-        a.href = img.dataUrl;
-        a.download = img.filename;
-        a.click();
-      }, index * 150);
-    });
+        const a = document.createElement('a')
+        a.href = img.dataUrl
+        a.download = img.filename
+        a.click()
+      }, index * 150)
+    })
   }
 }
