@@ -4,7 +4,7 @@ import { computed, Directive, inject, Injectable, input } from '@angular/core'
 class ZardIdInternalService {
   private counter = 0
 
-  generate (prefix: string) {
+  generate(prefix: string) {
     return `${prefix}-${++this.counter}`
   }
 }

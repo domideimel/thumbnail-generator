@@ -7,10 +7,10 @@ export const formLabelVariants = cva(
   {
     variants: {
       zRequired: {
-        true: 'after:content-[\'*\'] after:ml-0.5 after:text-red-500',
+        true: "after:content-['*'] after:ml-0.5 after:text-red-500",
       },
     },
-  },
+  }
 )
 
 export const formControlVariants = cva('')
@@ -29,4 +29,6 @@ export const formMessageVariants = cva('text-sm', {
   },
 })
 
-export type ZardFormMessageTypeVariants = NonNullable<VariantProps<typeof formMessageVariants>['zType']>;
+export type ZardFormMessageTypeVariants = NonNullable<
+  VariantProps<typeof formMessageVariants>['zType']
+>

@@ -12,4 +12,4 @@ export const loaderVariants = cva('', {
     zSize: 'default',
   },
 })
-export type ZardLoaderVariants = VariantProps<typeof loaderVariants>;
+export type ZardLoaderVariants = VariantProps<typeof loaderVariants>

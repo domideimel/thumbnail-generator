@@ -1,14 +1,30 @@
-import { booleanAttribute, computed, Directive, effect, ElementRef, forwardRef, inject, input, linkedSignal, model, } from '@angular/core'
+import {
+  booleanAttribute,
+  computed,
+  Directive,
+  effect,
+  ElementRef,
+  forwardRef,
+  inject,
+  input,
+  linkedSignal,
+  model,
+} from '@angular/core'
 import { type ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms'
 
 import type { ClassValue } from 'clsx'
 
 import { mergeClasses, noopFn } from '@/shared/utils/merge-classes'
 
-import { inputVariants, type ZardInputSizeVariants, type ZardInputStatusVariants, type ZardInputTypeVariants, } from './input.variants'
+import {
+  inputVariants,
+  type ZardInputSizeVariants,
+  type ZardInputStatusVariants,
+  type ZardInputTypeVariants,
+} from './input.variants'
 
-type OnTouchedType = () => void;
-type OnChangeType = (value: string) => void;
+type OnTouchedType = () => void
+type OnChangeType = (value: string) => void
 
 @Directive({
   // eslint-disable-next-line @angular-eslint/directive-selector
@@ -42,14 +58,14 @@ export class ZardInputDirective implements ControlValueAccessor {
         zStatus: this.zStatus(),
         zBorderless: this.zBorderless(),
       }),
-      this.class(),
-    ),
+      this.class()
+    )
   )
   private readonly elementRef = inject(ElementRef)
   private onTouched: OnTouchedType = noopFn
   private onChangeFn: OnChangeType = noopFn
 
-  constructor () {
+  constructor() {
     effect(() => {
       const value = this.value()
 
@@ -59,46 +75,47 @@ export class ZardInputDirective implements ControlValueAccessor {
     })
   }
 
-  disable (b: boolean): void {
+  disable(b: boolean): void {
     this.elementRef.nativeElement.disabled = b
   }
 
-  setDataSlot (name: string): void {
+  setDataSlot(name: string): void {
     if (this.elementRef?.nativeElement?.dataset) {
       this.elementRef.nativeElement.dataset.slot = name
     }
   }
 
-  getType (): ZardInputTypeVariants {
-    const isTextarea = this.elementRef.nativeElement.tagName.toLowerCase() === 'textarea'
+  getType(): ZardInputTypeVariants {
+    const isTextarea =
+      this.elementRef.nativeElement.tagName.toLowerCase() === 'textarea'
     return isTextarea ? 'textarea' : 'default'
   }
 
-  registerOnChange (fn: OnChangeType): void {
+  registerOnChange(fn: OnChangeType): void {
     this.onChangeFn = fn
   }
 
-  registerOnTouched (fn: OnTouchedType): void {
+  registerOnTouched(fn: OnTouchedType): void {
     this.onTouched = fn
   }
 
-  setDisabledState (isDisabled: boolean): void {
+  setDisabledState(isDisabled: boolean): void {
     this.disable(isDisabled)
   }
 
-  writeValue (value?: string): void {
+  writeValue(value?: string): void {
     const newValue = value ?? ''
     this.value.set(newValue)
     this.elementRef.nativeElement.value = newValue
   }
 
-  protected updateValue (target: EventTarget | null): void {
+  protected updateValue(target: EventTarget | null): void {
     const el = target as HTMLInputElement | HTMLTextAreaElement | null
     this.value.set(el?.value ?? '')
     this.onChangeFn(this.value())
   }
 
-  protected onBlur () {
+  protected onBlur() {
     this.onTouched()
   }
 }

@@ -1,6 +1,11 @@
 import { Component, computed, inject, signal } from '@angular/core'
 import { ZardCardComponent } from '@/shared/components/card'
-import { form, FormField, submit, validateStandardSchema } from '@angular/forms/signals'
+import {
+  form,
+  FormField,
+  submit,
+  validateStandardSchema,
+} from '@angular/forms/signals'
 import { ZardFormImports } from '@/shared/components/form'
 import { ZardInputDirective } from '@/shared/components/input'
 import { ZardButtonComponent } from '@/shared/components/button'
@@ -19,7 +24,7 @@ import { ZardAlertComponent } from '@/shared/components/alert'
     ZardInputDirective,
     ZardButtonComponent,
     ZardLoaderComponent,
-    ZardAlertComponent
+    ZardAlertComponent,
   ],
   templateUrl: './generator.html',
 })
@@ -29,15 +34,18 @@ export class Generator {
   readonly isLoading = signal(false)
   private readonly thumbnailGeneratorService = inject(ThumbnailGeneratorService)
   private readonly formSchema = signal({
-    url: ''
+    url: '',
   })
   readonly urlForm = form(this.formSchema, schema => {
     return validateStandardSchema(schema, UrlFormSchema)
   })
   private readonly isSubmitting = signal(false)
-  readonly isInvalidForm = computed(() => this.urlForm().invalid() && this.urlForm().dirty() && this.isSubmitting())
+  readonly isInvalidForm = computed(
+    () =>
+      this.urlForm().invalid() && this.urlForm().dirty() && this.isSubmitting()
+  )
 
-  async onSubmit (event: Event) {
+  async onSubmit(event: Event) {
     event.preventDefault()
     this.isSubmitting.set(true)
 
@@ -45,28 +53,31 @@ export class Generator {
       if (this.urlForm().valid()) {
         this.isLoading.set(true)
       }
-      this.thumbnailGeneratorService.generateImages(this.formSchema().url).pipe(
-        tap(data => {
-          this.generatedImages.set(data)
-        }),
-        catchError(error => {
-          console.error('Thumbnail generation error:', error)
-          this.errorMessage.set(`${error.message}`)
-          return of(null)
-        }),
-        finalize(() => this.isLoading.set(false))
-      ).subscribe()
+      this.thumbnailGeneratorService
+        .generateImages(this.formSchema().url)
+        .pipe(
+          tap(data => {
+            this.generatedImages.set(data)
+          }),
+          catchError(error => {
+            console.error('Thumbnail generation error:', error)
+            this.errorMessage.set(`${error.message}`)
+            return of(null)
+          }),
+          finalize(() => this.isLoading.set(false))
+        )
+        .subscribe()
     })
   }
 
-  downloadImage (image: GeneratedImage) {
+  downloadImage(image: GeneratedImage) {
     const link = document.createElement('a')
     link.href = image.dataUrl
     link.download = image.filename
     link.click()
   }
 
-  downloadAll () {
+  downloadAll() {
     this.generatedImages().forEach((img, index) => {
       setTimeout(() => {
         const a = document.createElement('a')

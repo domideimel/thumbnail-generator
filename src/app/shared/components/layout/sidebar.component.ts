@@ -1,9 +1,25 @@
-import { booleanAttribute, ChangeDetectionStrategy, Component, computed, effect, input, output, signal, type TemplateRef, ViewEncapsulation, } from '@angular/core'
+import {
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  input,
+  output,
+  signal,
+  type TemplateRef,
+  ViewEncapsulation,
+} from '@angular/core'
 
 import type { ClassValue } from 'clsx'
 
 import { type ZardIcon, ZardIconComponent } from '@/shared/components/icon'
-import { sidebarGroupLabelVariants, sidebarGroupVariants, sidebarTriggerVariants, sidebarVariants, } from '@/shared/components/layout/layout.variants'
+import {
+  sidebarGroupLabelVariants,
+  sidebarGroupVariants,
+  sidebarTriggerVariants,
+  sidebarVariants,
+} from '@/shared/components/layout/layout.variants'
 import { ZardStringTemplateOutletDirective } from '@/shared/core/directives/string-template-outlet/string-template-outlet.directive'
 import { mergeClasses } from '@/shared/utils/merge-classes'
 
@@ -11,7 +27,10 @@ import { mergeClasses } from '@/shared/utils/merge-classes'
   selector: 'z-sidebar',
   imports: [ZardStringTemplateOutletDirective, ZardIconComponent],
   template: `
-    <aside [class]="classes()" [style.width.px]="currentWidth()" [attr.data-collapsed]="zCollapsed()">
+    <aside
+      [class]="classes()"
+      [style.width.px]="currentWidth()"
+      [attr.data-collapsed]="zCollapsed()">
       <div class="flex-1 overflow-auto">
         <ng-content />
       </div>
@@ -23,9 +42,10 @@ import { mergeClasses } from '@/shared/utils/merge-classes'
           (keydown.{enter,space}.prevent)="toggleCollapsed()"
           tabindex="0"
           role="button"
-          [attr.aria-label]="zCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'"
-          [attr.aria-expanded]="!zCollapsed()"
-        >
+          [attr.aria-label]="
+            zCollapsed() ? 'Expand sidebar' : 'Collapse sidebar'
+          "
+          [attr.aria-expanded]="!zCollapsed()">
           <z-icon [zType]="chevronIcon()" />
         </div>
       }
@@ -67,17 +87,21 @@ export class SidebarComponent {
     }
     return collapsed ? 'chevron-right' : 'chevron-left'
   })
-  protected readonly classes = computed(() => mergeClasses(sidebarVariants(), this.class()))
-  protected readonly triggerClasses = computed(() => mergeClasses(sidebarTriggerVariants()))
+  protected readonly classes = computed(() =>
+    mergeClasses(sidebarVariants(), this.class())
+  )
+  protected readonly triggerClasses = computed(() =>
+    mergeClasses(sidebarTriggerVariants())
+  )
   private readonly internalCollapsed = signal(false)
 
-  constructor () {
+  constructor() {
     effect(() => {
       this.internalCollapsed.set(this.zCollapsed())
     })
   }
 
-  toggleCollapsed (): void {
+  toggleCollapsed(): void {
     const newState = !this.zCollapsed()
     this.internalCollapsed.set(newState)
     this.zCollapsedChange.emit(newState)
@@ -98,7 +122,9 @@ export class SidebarComponent {
 export class SidebarGroupComponent {
   readonly class = input<ClassValue>('')
 
-  protected readonly classes = computed(() => mergeClasses(sidebarGroupVariants(), this.class()))
+  protected readonly classes = computed(() =>
+    mergeClasses(sidebarGroupVariants(), this.class())
+  )
 }
 
 @Component({
@@ -115,5 +141,7 @@ export class SidebarGroupComponent {
 export class SidebarGroupLabelComponent {
   readonly class = input<ClassValue>('')
 
-  protected readonly classes = computed(() => mergeClasses(sidebarGroupLabelVariants(), this.class()))
+  protected readonly classes = computed(() =>
+    mergeClasses(sidebarGroupLabelVariants(), this.class())
+  )
 }

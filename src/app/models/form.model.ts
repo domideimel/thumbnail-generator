@@ -12,9 +12,9 @@ const UrlSchema = pipe(
   string(),
   nonEmpty('Please enter your url.'),
   url('The url is badly formatted.'),
-  minLength(10, 'URL must be at least 10 characters long.'),
+  minLength(10, 'URL must be at least 10 characters long.')
 )
 
 export const UrlFormSchema = object({
-  url: pipe(UrlSchema, YoutubeSchema)
+  url: pipe(UrlSchema, YoutubeSchema),
 })

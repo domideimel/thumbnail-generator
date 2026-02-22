@@ -8,9 +8,8 @@ describe('Generator', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Generator]
-    })
-      .compileComponents()
+      imports: [Generator],
+    }).compileComponents()
 
     fixture = TestBed.createComponent(Generator)
     component = fixture.componentInstance

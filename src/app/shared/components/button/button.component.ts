@@ -1,10 +1,27 @@
-import { afterNextRender, booleanAttribute, ChangeDetectionStrategy, Component, computed, ElementRef, inject, input, type OnDestroy, signal, ViewEncapsulation, } from '@angular/core'
+import {
+  afterNextRender,
+  booleanAttribute,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  ElementRef,
+  inject,
+  input,
+  type OnDestroy,
+  signal,
+  ViewEncapsulation,
+} from '@angular/core'
 
 import type { ClassValue } from 'clsx'
 
 import { mergeClasses } from '@/shared/utils/merge-classes'
 
-import { buttonVariants, type ZardButtonShapeVariants, type ZardButtonSizeVariants, type ZardButtonTypeVariants, } from './button.variants'
+import {
+  buttonVariants,
+  type ZardButtonShapeVariants,
+  type ZardButtonSizeVariants,
+  type ZardButtonTypeVariants,
+} from './button.variants'
 import { ZardIconComponent } from '@/shared/components/icon/icon.component'
 
 @Component({
@@ -12,17 +29,19 @@ import { ZardIconComponent } from '@/shared/components/icon/icon.component'
   imports: [ZardIconComponent],
   template: `
     @if (zLoading()) {
-      <z-icon zType="loader-circle" class="animate-spin duration-2000"/>
+      <z-icon zType="loader-circle" class="animate-spin duration-2000" />
     }
-    <ng-content/>
+    <ng-content />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
     '[class]': 'classes()',
     '[attr.data-icon-only]': 'iconOnly() || null',
-    '[attr.data-disabled]': 'isNotInsideOfButtonOrLink() && zDisabled() || null',
-    '[attr.aria-disabled]': 'isNotInsideOfButtonOrLink() && zDisabled() || null',
+    '[attr.data-disabled]':
+      'isNotInsideOfButtonOrLink() && zDisabled() || null',
+    '[attr.aria-disabled]':
+      'isNotInsideOfButtonOrLink() && zDisabled() || null',
     '[attr.disabled]': 'isNotInsideOfButtonOrLink() && zDisabled() ? "" : null',
     '[attr.role]': 'isNotInsideOfButtonOrLink() ? "button" : null',
     '[attr.tabindex]': 'isNotInsideOfButtonOrLink() ? "0" : null',
@@ -47,8 +66,8 @@ export class ZardButtonComponent implements OnDestroy {
         zLoading: this.zLoading(),
         zDisabled: this.zDisabled(),
       }),
-      this.class(),
-    ),
+      this.class()
+    )
   )
   private readonly elementRef = inject(ElementRef<HTMLElement>)
   protected readonly isNotInsideOfButtonOrLink = computed(() => {
@@ -64,9 +83,12 @@ export class ZardButtonComponent implements OnDestroy {
   readonly iconOnly = this.iconOnlyState.asReadonly()
   private _mutationObserver: MutationObserver | null = null
 
-  constructor () {
+  constructor() {
     afterNextRender(() => {
-      if (typeof window === 'undefined' || typeof MutationObserver === 'undefined') {
+      if (
+        typeof window === 'undefined' ||
+        typeof MutationObserver === 'undefined'
+      ) {
         return
       }
 
@@ -101,7 +123,7 @@ export class ZardButtonComponent implements OnDestroy {
     })
   }
 
-  ngOnDestroy (): void {
+  ngOnDestroy(): void {
     if (this._mutationObserver) {
       this._mutationObserver.disconnect()
       this._mutationObserver = null

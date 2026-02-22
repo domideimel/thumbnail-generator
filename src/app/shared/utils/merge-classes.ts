@@ -3,13 +3,15 @@ import { twMerge } from 'tailwind-merge'
 
 export type { ClassValue }
 
-export function mergeClasses (...inputs: ClassValue[]) {
+export function mergeClasses(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
 export const noopFn = () => void 0
 
-export const isElementContentTruncated = (element: HTMLElement | undefined): boolean => {
+export const isElementContentTruncated = (
+  element: HTMLElement | undefined
+): boolean => {
   if (!element) {
     return false
   }

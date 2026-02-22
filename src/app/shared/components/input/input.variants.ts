@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority'
 
-export type zInputIcon = 'email' | 'password' | 'text';
+export type zInputIcon = 'email' | 'password' | 'text'
 
 export const inputVariants = cva('w-full', {
   variants: {
@@ -30,11 +30,25 @@ export const inputVariants = cva('w-full', {
   },
   compoundVariants: [
     { zType: 'default', zSize: 'default', class: 'h-9 py-2 file:max-md:py-0' },
-    { zType: 'default', zSize: 'sm', class: 'h-8 file:md:py-2 file:max-md:py-1.5' },
-    { zType: 'default', zSize: 'lg', class: 'h-10 py-1 file:md:py-3 file:max-md:py-2.5' },
+    {
+      zType: 'default',
+      zSize: 'sm',
+      class: 'h-8 file:md:py-2 file:max-md:py-1.5',
+    },
+    {
+      zType: 'default',
+      zSize: 'lg',
+      class: 'h-10 py-1 file:md:py-3 file:max-md:py-2.5',
+    },
   ],
 })
 
-export type ZardInputTypeVariants = NonNullable<VariantProps<typeof inputVariants>['zType']>;
-export type ZardInputSizeVariants = NonNullable<VariantProps<typeof inputVariants>['zSize']>;
-export type ZardInputStatusVariants = NonNullable<VariantProps<typeof inputVariants>['zStatus']>;
+export type ZardInputTypeVariants = NonNullable<
+  VariantProps<typeof inputVariants>['zType']
+>
+export type ZardInputSizeVariants = NonNullable<
+  VariantProps<typeof inputVariants>['zSize']
+>
+export type ZardInputStatusVariants = NonNullable<
+  VariantProps<typeof inputVariants>['zStatus']
+>

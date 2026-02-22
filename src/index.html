@@ -1,33 +1,33 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>ThumbnailGenerator</title>
-  <base href="/">
-  <meta content="width=device-width, initial-scale=1" name="viewport">
-  <link href="/assets/app-logo.svg" rel="icon" type="image/x-icon">
+  <head>
+    <meta charset="utf-8" />
+    <title>ThumbnailGenerator</title>
+    <base href="/" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link href="/assets/app-logo.svg" rel="icon" type="image/x-icon" />
 
-  <script>
-    (function () {
-      const html = document.documentElement
+    <script>
+      ;(function () {
+        const html = document.documentElement
 
-      try {
-        const theme = localStorage.theme
-        const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false
+        try {
+          const theme = localStorage.theme
+          const prefersDark =
+            window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? false
 
-        const isSystem = theme === 'system' || !('theme' in localStorage)
-        const isDark = theme === 'dark' || (isSystem && prefersDark)
-        const resolvedTheme = isDark ? 'dark' : 'light'
-        html.classList.toggle('dark', isDark)
-        html.classList.toggle('dark-theme', isDark)
-        html.setAttribute('data-theme', theme ?? 'system')
-        html.style.colorScheme = resolvedTheme
-      } catch (_) {}
-    })()
-  </script>
-
-</head>
-<body>
-<app-root></app-root>
-</body>
+          const isSystem = theme === 'system' || !('theme' in localStorage)
+          const isDark = theme === 'dark' || (isSystem && prefersDark)
+          const resolvedTheme = isDark ? 'dark' : 'light'
+          html.classList.toggle('dark', isDark)
+          html.classList.toggle('dark-theme', isDark)
+          html.setAttribute('data-theme', theme ?? 'system')
+          html.style.colorScheme = resolvedTheme
+        } catch (_) {}
+      })()
+    </script>
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

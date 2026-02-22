@@ -1,11 +1,10 @@
 <div class="space-y-10">
   @if (errorMessage()?.length) {
-    <z-alert [zDescription]="errorMessage()" zType="destructive"/>
+    <z-alert [zDescription]="errorMessage()" zType="destructive" />
   }
   <z-card
     zDescription="Input a YouTube URL and click Generate Images to generate multiple images"
-    zTitle="Youtube Thumbnail Generator"
-  >
+    zTitle="Youtube Thumbnail Generator">
     <form (submit)="onSubmit($event)" class="space-y-4">
       <z-form-field>
         <label for="url" z-form-label zRequired>Youtube Link</label>
@@ -17,38 +16,49 @@
             id="url"
             placeholder="Enter YouTube URL"
             type="url"
-            z-input
-          />
+            z-input />
         </z-form-control>
 
         @if (isInvalidForm()) {
           @for (error of urlForm.url().errors(); track error.message) {
             <z-form-message zType="error">{{ error.message }}</z-form-message>
           } @empty {
-            <z-form-message zType="error">Please enter a valid YouTube URL.</z-form-message>
+            <z-form-message zType="error"
+              >Please enter a valid YouTube URL.</z-form-message
+            >
           }
         } @else {
-          <z-form-message zType="default">Please enter a valid YouTube URL.</z-form-message>
+          <z-form-message zType="default"
+            >Please enter a valid YouTube URL.</z-form-message
+          >
         }
       </z-form-field>
       <div class="flex space-x-4">
         <button class="space-x-2" type="submit" z-button zType="default">
           @if (isLoading()) {
-            <z-loader/>
+            <z-loader />
           }
           Generate Images
         </button>
         @if (generatedImages()?.length) {
-          <button (click)="downloadAll()" type="button" z-button zType="default">Download All Images</button>
+          <button
+            (click)="downloadAll()"
+            type="button"
+            z-button
+            zType="default">
+            Download All Images
+          </button>
         }
       </div>
     </form>
   </z-card>
   <div class="grid lg:grid-cols-2 lg:grid-rows-2 gap-10">
     @for (image of generatedImages(); track image) {
-      <z-card (zActionClick)="downloadImage(image)" [zTitle]="'Generated Image ' + image.type"
-              zAction="Download generated Image">
-        <img [src]="image.dataUrl" alt="" class="w-full h-auto"/>
+      <z-card
+        (zActionClick)="downloadImage(image)"
+        [zTitle]="'Generated Image ' + image.type"
+        zAction="Download generated Image">
+        <img [src]="image.dataUrl" alt="" class="w-full h-auto" />
       </z-card>
     }
   </div>

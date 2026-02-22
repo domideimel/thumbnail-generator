@@ -1,6 +1,14 @@
 import { MediaMatcher } from '@angular/cdk/layout'
 import { DOCUMENT, isPlatformBrowser } from '@angular/common'
-import { computed, DestroyRef, effect, inject, Injectable, PLATFORM_ID, signal } from '@angular/core'
+import {
+  computed,
+  DestroyRef,
+  effect,
+  inject,
+  Injectable,
+  PLATFORM_ID,
+  signal,
+} from '@angular/core'
 
 export enum EDarkModes {
   LIGHT = 'light',
@@ -8,7 +16,10 @@ export enum EDarkModes {
   SYSTEM = 'system',
 }
 
-export type DarkModeOptions = EDarkModes.LIGHT | EDarkModes.DARK | EDarkModes.SYSTEM;
+export type DarkModeOptions =
+  | EDarkModes.LIGHT
+  | EDarkModes.DARK
+  | EDarkModes.SYSTEM
 
 @Injectable({
   providedIn: 'root',
@@ -22,15 +33,19 @@ export class ZardDarkMode {
   readonly themeMode = computed(() => {
     const currentTheme = this.themeSignal()
     if (currentTheme === EDarkModes.SYSTEM) {
-      return this.isDarkModeActive(currentTheme) ? EDarkModes.DARK : EDarkModes.LIGHT
+      return this.isDarkModeActive(currentTheme)
+        ? EDarkModes.DARK
+        : EDarkModes.LIGHT
     }
     return currentTheme
   })
   private initialized = false
 
-  constructor () {
+  constructor() {
     if (this.isBrowser) {
-      this._query = inject(MediaMatcher).matchMedia('(prefers-color-scheme: dark)')
+      this._query = inject(MediaMatcher).matchMedia(
+        '(prefers-color-scheme: dark)'
+      )
       this.destroyRef.onDestroy(() => this.handleSystemChanges(false))
 
       effect(() => {
@@ -46,26 +61,26 @@ export class ZardDarkMode {
    * Call currentTheme() to access the value or use it directly in templates where signals are supported.
    * @example service.currentTheme() // returns "light", "dark", or "system"
    */
-  get currentTheme () {
+  get currentTheme() {
     return this.themeSignal.asReadonly()
   }
 
   private _query?: MediaQueryList
 
-  private get query (): MediaQueryList {
+  private get query(): MediaQueryList {
     if (!this.isBrowser || !this._query) {
       throw new Error('Cannot access media query on server')
     }
     return this._query
   }
 
-  init () {
+  init() {
     if (!this.initialized && this.isBrowser) {
       this.initializeTheme()
     }
   }
 
-  toggleTheme (targetMode?: DarkModeOptions): void {
+  toggleTheme(targetMode?: DarkModeOptions): void {
     if (!this.isBrowser) {
       return
     }
@@ -73,14 +88,18 @@ export class ZardDarkMode {
     if (targetMode) {
       this.applyTheme(targetMode)
     } else {
-      const next = this.themeMode() === EDarkModes.DARK ? EDarkModes.LIGHT : EDarkModes.DARK
+      const next =
+        this.themeMode() === EDarkModes.DARK
+          ? EDarkModes.LIGHT
+          : EDarkModes.DARK
       this.applyTheme(next)
     }
   }
 
-  private handleThemeChange = (event: MediaQueryListEvent) => this.updateThemeMode(event.matches, EDarkModes.SYSTEM)
+  private handleThemeChange = (event: MediaQueryListEvent) =>
+    this.updateThemeMode(event.matches, EDarkModes.SYSTEM)
 
-  private initializeTheme (): void {
+  private initializeTheme(): void {
     const storedTheme = this.getStoredTheme()
     if (storedTheme) {
       this.themeSignal.set(storedTheme)
@@ -92,7 +111,7 @@ export class ZardDarkMode {
     this.initialized = true
   }
 
-  private applyTheme (theme: DarkModeOptions): void {
+  private applyTheme(theme: DarkModeOptions): void {
     if (!this.isBrowser) {
       return
     }
@@ -111,14 +130,18 @@ export class ZardDarkMode {
     }
   }
 
-  private getStoredTheme (): DarkModeOptions | undefined {
+  private getStoredTheme(): DarkModeOptions | undefined {
     if (!this.isBrowser) {
       return undefined
     }
 
     try {
       const value = localStorage.getItem(ZardDarkMode.STORAGE_KEY)
-      if (value === EDarkModes.LIGHT || value === EDarkModes.DARK || value === EDarkModes.SYSTEM) {
+      if (
+        value === EDarkModes.LIGHT ||
+        value === EDarkModes.DARK ||
+        value === EDarkModes.SYSTEM
+      ) {
         return value
       }
     } catch (error) {
@@ -127,21 +150,24 @@ export class ZardDarkMode {
     return undefined
   }
 
-  private updateThemeMode (isDarkMode: boolean, themeMode: EDarkModes): void {
+  private updateThemeMode(isDarkMode: boolean, themeMode: EDarkModes): void {
     const html = this.document.documentElement
     html.classList.toggle('dark', isDarkMode)
     html.setAttribute('data-theme', themeMode)
   }
 
-  private isDarkModeActive (currentTheme: DarkModeOptions): boolean {
+  private isDarkModeActive(currentTheme: DarkModeOptions): boolean {
     if (!this.isBrowser) {
       return false
     }
 
-    return currentTheme === EDarkModes.DARK || (currentTheme === EDarkModes.SYSTEM && this.query.matches)
+    return (
+      currentTheme === EDarkModes.DARK ||
+      (currentTheme === EDarkModes.SYSTEM && this.query.matches)
+    )
   }
 
-  private handleSystemChanges (addListener = true): void {
+  private handleSystemChanges(addListener = true): void {
     try {
       if (addListener) {
         this.query.addEventListener('change', this.handleThemeChange)

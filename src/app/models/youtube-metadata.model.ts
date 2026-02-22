@@ -16,7 +16,7 @@ export interface YoutubeMetadataModel {
 }
 
 export interface GeneratedImage {
-  filename: string;
-  dataUrl: string;
-  type: 'full' | 'large' | 'basic' | 'blurred';
+  filename: string
+  dataUrl: string
+  type: 'full' | 'large' | 'basic' | 'blurred'
 }

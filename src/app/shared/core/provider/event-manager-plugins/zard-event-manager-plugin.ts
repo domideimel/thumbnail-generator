@@ -26,26 +26,32 @@ import { EventManagerPlugin } from '@angular/platform-browser'
 export class ZardEventManagerPlugin extends EventManagerPlugin {
   #keywords = ['prevent', 'stop', 'stop-immediate', 'prevent-with-stop']
 
-  override supports (eventName: string): boolean {
+  override supports(eventName: string): boolean {
     return this.#keywords.some(keyword => eventName.endsWith(`.${keyword}`))
   }
 
-  override addEventListener (
+  override addEventListener(
     element: HTMLElement,
     eventName: string,
     handler: (event: Event) => void,
-    options?: ListenerOptions,
+    options?: ListenerOptions
     // eslint-disable-next-line
   ): Function {
-    const { event, keyword, keys } = this.#provideEventFrom(eventName, this.#keywords)
+    const { event, keyword, keys } = this.#provideEventFrom(
+      eventName,
+      this.#keywords
+    )
     return this.manager.addEventListener(
       element,
       event,
       (event: Event) => {
         const isKeyboardEvent = event instanceof KeyboardEvent
-        const isElementDisabled = element.getAttribute('aria-disabled') === 'true'
+        const isElementDisabled =
+          element.getAttribute('aria-disabled') === 'true'
         const shouldApplyModifier =
-          (!keys.length || (isKeyboardEvent && keys.includes(event.key.toLowerCase()))) && !isElementDisabled
+          (!keys.length ||
+            (isKeyboardEvent && keys.includes(event.key.toLowerCase()))) &&
+          !isElementDisabled
 
         if (shouldApplyModifier) {
           switch (keyword) {
@@ -66,11 +72,14 @@ export class ZardEventManagerPlugin extends EventManagerPlugin {
         }
         handler(event)
       },
-      options,
+      options
     )
   }
 
-  #provideEventFrom (eventName: string, keywords: string[]): { event: string; keyword: string; keys: string[] } {
+  #provideEventFrom(
+    eventName: string,
+    keywords: string[]
+  ): { event: string; keyword: string; keys: string[] } {
     const eventNameSubstrings = eventName.split('.')
     let event = ''
     let keys: string[] = []
@@ -93,7 +102,7 @@ export class ZardEventManagerPlugin extends EventManagerPlugin {
     return { event, keyword, keys }
   }
 
-  #extractKeys (substring: string): string[] {
+  #extractKeys(substring: string): string[] {
     const stringList = substring.substring(1, substring.length - 1)
     return stringList
       .split(',')
