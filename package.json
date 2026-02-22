@@ -7,11 +7,23 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.ts": ["eslint --fix", "prettier --write"],
+    "src/**/*.html": ["prettier --write"]
   },
   "prettier": {
-    "printWidth": 100,
+    "printWidth": 80,
     "singleQuote": true,
+    "useTabs": false,
+    "tabWidth": 2,
+    "arrowParens": "avoid",
+    "semi": false,
+    "trailingComma": "es5",
+    "bracketSpacing": true,
+    "bracketSameLine": true,
     "overrides": [
       {
         "files": "*.html",
@@ -48,8 +60,11 @@
     "@tailwindcss/postcss": "^4.1.12",
     "angular-eslint": "21.2.0",
     "eslint": "^9.39.2",
+    "husky": "^9.1.7",
     "jsdom": "^27.1.0",
+    "lint-staged": "^16.2.7",
     "postcss": "^8.5.3",
+    "prettier": "^3.8.1",
     "tailwindcss": "^4.1.12",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "~5.9.2",
