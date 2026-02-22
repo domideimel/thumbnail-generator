@@ -1,5 +1,5 @@
 <div class="space-y-10">
-  @if (errorMessage()?.length) {
+  @if (errorMessage().length) {
     <z-alert [zDescription]="errorMessage()" zType="destructive" />
   }
   <z-card
@@ -40,7 +40,7 @@
           }
           Generate Images
         </button>
-        @if (generatedImages()?.length) {
+        @if (generatedImages().length) {
           <button
             (click)="downloadAll()"
             type="button"
