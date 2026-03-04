@@ -113,6 +113,60 @@ importers:
         specifier: ^4.0.8
         version: 4.0.18(jiti@2.6.1)(jsdom@27.4.0)(lightningcss@1.31.1)(sass@1.97.1)(yaml@2.8.2)
 
+  node_modules/angular-cli-4Eyare:
+    dependencies:
+      '@angular/pwa':
+        specifier: 21.1.4
+        version: 21.1.4(@angular/cli@21.1.4(chokidar@5.0.0))(chokidar@5.0.0)
+
+  node_modules/angular-cli-6WDrHs:
+    dependencies:
+      '@angular/pwa':
+        specifier: 21.1.4
+        version: 21.1.4(@angular/cli@21.1.4(chokidar@5.0.0))(chokidar@5.0.0)
+
+  node_modules/angular-cli-7GAE7C:
+    dependencies:
+      '@angular/pwa':
+        specifier: 21.1.4
+        version: 21.1.4(@angular/cli@21.1.4(chokidar@5.0.0))(chokidar@5.0.0)
+
+  node_modules/angular-cli-IMxIZZ:
+    dependencies:
+      '@angular/pwa':
+        specifier: 21.1.4
+        version: 21.1.4(@angular/cli@21.1.4(chokidar@5.0.0))(chokidar@5.0.0)
+
+  node_modules/angular-cli-Ky3030:
+    dependencies:
+      '@angular/pwa':
+        specifier: 21.1.4
+        version: 21.1.4(@angular/cli@21.1.4(chokidar@5.0.0))(chokidar@5.0.0)
+
+  node_modules/angular-cli-Swovco:
+    dependencies:
+      '@angular/pwa':
+        specifier: 21.1.4
+        version: 21.1.4(@angular/cli@21.1.4(chokidar@5.0.0))(chokidar@5.0.0)
+
+  node_modules/angular-cli-j0sLRO:
+    dependencies:
+      '@angular/pwa':
+        specifier: 21.1.4
+        version: 21.1.4(@angular/cli@21.1.4(chokidar@5.0.0))(chokidar@5.0.0)
+
+  node_modules/angular-cli-kaSPpm:
+    dependencies:
+      '@angular/pwa':
+        specifier: 21.1.4
+        version: 21.1.4(@angular/cli@21.1.4(chokidar@5.0.0))(chokidar@5.0.0)
+
+  node_modules/angular-cli-wzZ6Aa:
+    dependencies:
+      '@angular/pwa':
+        specifier: 21.1.4
+        version: 21.1.4(@angular/cli@21.1.4(chokidar@5.0.0))(chokidar@5.0.0)
+
 packages:
 
   '@acemir/cssom@0.9.31':
@@ -356,6 +410,15 @@ packages:
       '@angular/core': 21.1.5
     peerDependenciesMeta:
       '@angular/animations':
+        optional: true
+
+  '@angular/pwa@21.1.4':
+    resolution: {integrity: sha512-iILmCRFKNgposTk9qsprDVpD9o6urd8Z7aBMxFZDH9R9ro6U/iCoAwU2FtUCUMtuQtPcKNqFrW5HBXZnwczgCg==}
+    engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
+    peerDependencies:
+      '@angular/cli': ^21.1.4
+    peerDependenciesMeta:
+      '@angular/cli':
         optional: true
 
   '@angular/router@21.1.5':
@@ -4005,6 +4068,16 @@ snapshots:
       '@angular/core': 21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)
       tslib: 2.8.1
 
+  '@angular/pwa@21.1.4(@angular/cli@21.1.4(chokidar@5.0.0))(chokidar@5.0.0)':
+    dependencies:
+      '@angular-devkit/schematics': 21.1.4(chokidar@5.0.0)
+      '@schematics/angular': 21.1.4(chokidar@5.0.0)
+      parse5-html-rewriting-stream: 8.0.0
+    optionalDependencies:
+      '@angular/cli': 21.1.4(chokidar@5.0.0)
+    transitivePeerDependencies:
+      - chokidar
+
   '@angular/router@21.1.5(@angular/common@21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2))(@angular/platform-browser@21.1.5(@angular/common@21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2)))(rxjs@7.8.2)':
     dependencies:
       '@angular/common': 21.1.5(@angular/core@21.1.5(@angular/compiler@21.1.5)(rxjs@7.8.2))(rxjs@7.8.2)
@@ -4678,7 +4751,7 @@ snapshots:
 
   '@npmcli/fs@5.0.0':
     dependencies:
-      semver: 7.7.3
+      semver: 7.7.4
 
   '@npmcli/git@7.0.1':
     dependencies:
@@ -4688,7 +4761,7 @@ snapshots:
       npm-pick-manifest: 11.0.3
       proc-log: 6.1.0
       promise-retry: 2.0.1
-      semver: 7.7.3
+      semver: 7.7.4
       which: 6.0.1
 
   '@npmcli/installed-package-contents@4.0.0':
@@ -4705,7 +4778,7 @@ snapshots:
       hosted-git-info: 9.0.2
       json-parse-even-better-errors: 5.0.0
       proc-log: 6.1.0
-      semver: 7.7.3
+      semver: 7.7.4
       spdx-expression-parse: 4.0.0
 
   '@npmcli/promise-spawn@9.0.1':
@@ -6331,7 +6404,7 @@ snapshots:
       make-fetch-happen: 15.0.3
       nopt: 9.0.0
       proc-log: 6.1.0
-      semver: 7.7.3
+      semver: 7.7.4
       tar: 7.5.9
       tinyglobby: 0.2.15
       which: 6.0.1
@@ -6350,7 +6423,7 @@ snapshots:
 
   npm-install-checks@8.0.0:
     dependencies:
-      semver: 7.7.3
+      semver: 7.7.4
 
   npm-normalize-package-bin@5.0.0: {}
 
@@ -6358,7 +6431,7 @@ snapshots:
     dependencies:
       hosted-git-info: 9.0.2
       proc-log: 6.1.0
-      semver: 7.7.3
+      semver: 7.7.4
       validate-npm-package-name: 7.0.2
 
   npm-packlist@10.0.4:
@@ -6371,7 +6444,7 @@ snapshots:
       npm-install-checks: 8.0.0
       npm-normalize-package-bin: 5.0.0
       npm-package-arg: 13.0.2
-      semver: 7.7.3
+      semver: 7.7.4
 
   npm-registry-fetch@19.1.1:
     dependencies:
