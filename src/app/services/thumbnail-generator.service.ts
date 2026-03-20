@@ -116,10 +116,12 @@ export class ThumbnailGeneratorService {
   private getYouTubeID(url: string): string | null {
     try {
       const parsed = new URL(url)
-      if (parsed.hostname === 'youtu.be') {
+      const host = parsed.hostname.toLowerCase()
+      if (host === 'youtu.be') {
         return parsed.pathname.slice(1)
       }
-      if (parsed.hostname.includes('youtube.com')) {
+      const allowedYoutubeHosts = new Set(['youtube.com', 'www.youtube.com'])
+      if (allowedYoutubeHosts.has(host)) {
         return parsed.searchParams.get('v')
       }
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
