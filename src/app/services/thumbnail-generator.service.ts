@@ -1,8 +1,13 @@
 import { inject, Injectable } from '@angular/core'
 import { catchError, forkJoin, map, Observable, throwError } from 'rxjs'
 import { HttpClient } from '@angular/common/http'
-import { GeneratedImage, YoutubeMetadataModel } from '@/models'
+import {
+  GeneratedImage,
+  YoutubeMetadataModel,
+  YoutubeMetadataModelSchema,
+} from '@/models'
 import { DOCUMENT } from '@angular/common'
+import { parse } from 'valibot'
 
 const CONFIG = {
   FONT: 'Arial',
@@ -52,10 +57,10 @@ export class ThumbnailGeneratorService {
       image: this.loadBestThumbnail(videoId),
     }).pipe(
       map(({ metadata, image }) => {
-        if (!metadata.title || !metadata.author_name) {
-          throw new Error('Invalid video or missing metadata')
-        }
-        return this.drawAllImages(image, metadata, videoId)
+        const output = parse(YoutubeMetadataModelSchema, metadata, {
+          message: 'Invalid video or missing metadata',
+        })
+        return this.drawAllImages(image, output, videoId)
       }),
       catchError(err =>
         throwError(() => new Error(`Failed to generate images: ${err.message}`))
